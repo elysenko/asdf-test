@@ -1,0 +1,27 @@
+# Colossus auto-deploy workflow
+# Managed by Colossus — do not edit manually.
+
+name: Colossus Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+          tags: tag:ci
+
+      - name: Trigger Colossus build
+        run: |
+          curl -sf -X POST \
+            "${{ secrets.COLOSSUS_API_URL }}/api/v1/webhooks/deploy/${{ secrets.COLOSSUS_DEPLOYMENT_ID }}" \
+            -H "x-webhook-secret: ${{ secrets.COLOSSUS_WEBHOOK_SECRET }}" \
+            -H "Content-Type: application/json" \
+            --max-time 10
+          echo "✅ Build job triggered"

@@ -1,0 +1,1 @@
+/app/skills/qr/commands/qr.md

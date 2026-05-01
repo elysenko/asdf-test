@@ -1,0 +1,1 @@
+/app/skills/spec/commands/spec.md

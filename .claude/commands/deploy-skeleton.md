@@ -1,0 +1,1 @@
+/app/skills/deploy-skeleton/commands/deploy-skeleton.md

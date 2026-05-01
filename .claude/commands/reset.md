@@ -1,0 +1,1 @@
+/app/skills/reset/commands/reset.md

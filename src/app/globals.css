@@ -9,6 +9,8 @@
   --sky-500: #0ea5e9;
   --sky-600: #0284c7;
   --sky-700: #0369a1;
+  --purple-600: #9333ea;
+  --purple-700: #7e22ce;
   --slate-50: #f8fafc;
   --slate-200: #e2e8f0;
   --slate-400: #94a3b8;
@@ -160,14 +162,14 @@ body {
   font-weight: 600;
   border: 0;
   border-radius: 8px;
-  background: var(--sky-600);
+  background: var(--purple-600);
   color: white;
   cursor: pointer;
   transition: background-color 0.15s ease, transform 0.05s ease;
 }
 
 .search-form__submit:hover:not(:disabled) {
-  background: var(--sky-700);
+  background: var(--purple-700);
 }
 
 .search-form__submit:active:not(:disabled) {

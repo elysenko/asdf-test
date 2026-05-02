@@ -1,0 +1,24 @@
+# deploy/values-postgresql.yaml
+# Bitnami PostgreSQL Helm chart values for the city-weather-search app.
+#
+# Deploy with:
+#   helm repo add bitnami https://charts.bitnami.com/bitnami
+#   helm upgrade --install city-weather-search-postgresql bitnami/postgresql \
+#     -f deploy/values-postgresql.yaml -n colossus-apps \
+#     --set auth.postgresPassword=<secret>
+
+auth:
+  postgresPassword: ""         # set via --set auth.postgresPassword=<secret>
+  database: city_weather_search_db
+
+primary:
+  persistence:
+    size: 5Gi
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi

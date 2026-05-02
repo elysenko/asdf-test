@@ -1,0 +1,54 @@
+// Prisma schema for the city-weather-search app.
+//
+// Scope reminder: this feature is anonymous and stateless. There are NO user,
+// session, or search-history tables — and downstream agents (backend_agent,
+// etc.) should NOT add them. The only persisted entity is `upstream_error_log`,
+// which captures server-side failures of the geocoder and weather upstream
+// providers so operators can inspect recent unavailability events.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// NOTE: backend_agent removed the `prisma-pothos-types` generator that was
+// originally scaffolded by db_agent. This feature is implemented as a Next.js
+// REST API (POST /api/weather), not a Pothos / GraphQL surface, so the Pothos
+// types generator has no consumer and would force an unused dependency.
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Which upstream API the failure originated from.
+enum UpstreamSource {
+  GEOCODER
+  WEATHER
+}
+
+/// Server-side log of upstream API failures.
+///
+/// Backs the "logs the error server-side" requirement in the
+/// geocoder-unavailable and weather-unavailable scenarios. There is NO read
+/// endpoint in scope for this spec — the DB access module exposes only
+/// `insertUpstreamError(record)`. Operators query this table directly via
+/// kubectl/psql when investigating outages.
+///
+/// Application-level rule: `upstreamMessage` must be truncated to 1 KB before
+/// insert. The column itself is unbounded TEXT so a forgotten truncate does
+/// not produce a hard insert failure, but the access module is the source of
+/// truth for the limit.
+model UpstreamErrorLog {
+  id              String         @id @default(cuid())
+  occurredAt      DateTime       @default(now()) @map("occurred_at")
+  source          UpstreamSource
+  upstreamStatus  Int?           @map("upstream_status")
+  upstreamMessage String?        @map("upstream_message") @db.Text
+  requestCity     String?        @map("request_city") @db.VarChar(100)
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt      @map("updated_at")
+
+  @@index([occurredAt])
+  @@index([source, occurredAt])
+  @@map("upstream_error_log")
+}

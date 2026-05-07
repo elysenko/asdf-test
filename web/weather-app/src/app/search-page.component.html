@@ -1,0 +1,144 @@
+<header class="page-header">
+  <div class="page-header__inner">
+    <div class="page-header__brand">
+      <span class="page-header__logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.7-1.5A4.5 4.5 0 0 0 6.5 19z"></path>
+        </svg>
+      </span>
+      <div class="page-header__title">
+        <span class="page-header__eyebrow">Weather</span>
+        <h1>City Weather Search</h1>
+      </div>
+    </div>
+    <p class="page-header__tagline">
+      Look up the current conditions for any city in the world.
+    </p>
+  </div>
+</header>
+
+<main class="page-main">
+  <section class="search-section" aria-labelledby="search-heading">
+    <h2 id="search-heading" class="sr-only">Search</h2>
+
+    <form class="search-form" (ngSubmit)="onSubmit()" novalidate>
+      <label for="city" class="search-form__label">City</label>
+      <div class="search-form__input-row">
+        <span class="search-form__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </span>
+        <input
+          id="city"
+          name="city"
+          type="text"
+          class="search-form__input"
+          [class.is-invalid]="validationMessage"
+          autocomplete="off"
+          autocapitalize="words"
+          spellcheck="false"
+          inputmode="search"
+          placeholder="e.g. London, Tokyo, Springfield"
+          [maxlength]="maxCityLength"
+          [disabled]="isLoading"
+          [(ngModel)]="city"
+          (input)="onCityInput()"
+          [attr.aria-invalid]="validationMessage ? 'true' : 'false'"
+          aria-describedby="search-help city-validation"
+        />
+        <button
+          type="submit"
+          class="search-form__submit"
+          [disabled]="isLoading"
+          aria-label="Search weather"
+        >
+          @if (isLoading) {
+            <span class="search-form__spinner" aria-hidden="true"></span>
+            <span>Searching…</span>
+          } @else {
+            <span>Search</span>
+          }
+        </button>
+      </div>
+
+      <p id="search-help" class="search-form__hint">
+        Up to 100 characters. Letters, spaces, hyphens, apostrophes, periods, and commas only.
+      </p>
+
+      <p
+        id="city-validation"
+        class="search-form__validation"
+        [class.is-visible]="validationMessage"
+        role="status"
+      >
+        @if (validationMessage) {
+          <span class="search-form__validation-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </span>
+          <span>{{ validationMessage }}</span>
+        }
+      </p>
+    </form>
+  </section>
+
+  <section
+    class="results-section"
+    aria-live="polite"
+    [attr.aria-busy]="isLoading ? 'true' : 'false'"
+  >
+    @if (errorMessage) {
+      <div #errorBanner tabindex="-1" class="results-section__error">
+        <app-error-banner
+          [message]="errorMessage"
+          (dismiss)="dismissErrorBanner()"
+        ></app-error-banner>
+      </div>
+    }
+
+    @if (isLoading) {
+      <div class="loading-skeleton" role="status" aria-label="Loading weather">
+        <div class="loading-skeleton__bar loading-skeleton__bar--title"></div>
+        <div class="loading-skeleton__bar loading-skeleton__bar--temp"></div>
+        <div class="loading-skeleton__bar loading-skeleton__bar--text"></div>
+        <div class="loading-skeleton__metrics">
+          <div class="loading-skeleton__bar loading-skeleton__bar--metric"></div>
+          <div class="loading-skeleton__bar loading-skeleton__bar--metric"></div>
+        </div>
+      </div>
+    } @else if (status === 'success' && result) {
+      <div #resultRegion tabindex="-1" class="results-section__result">
+        <app-weather-result-card [result]="result"></app-weather-result-card>
+      </div>
+    } @else if (status === 'idle' && !errorMessage) {
+      <div class="empty-state">
+        <span class="empty-state__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+          </svg>
+        </span>
+        <h2 class="empty-state__title">Search a city to begin</h2>
+        <p class="empty-state__body">
+          Enter a city name above and we'll show the current temperature, conditions, humidity, and wind speed.
+        </p>
+        <div class="empty-state__chips" aria-label="Suggested cities">
+          @for (suggestion of suggestions; track suggestion) {
+            <button
+              type="button"
+              class="empty-state__chip"
+              (click)="trySuggestion(suggestion)"
+            >
+              {{ suggestion }}
+            </button>
+          }
+        </div>
+      </div>
+    }
+  </section>
+</main>

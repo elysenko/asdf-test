@@ -1,0 +1,26 @@
+<article class="result-card" aria-labelledby="result-location">
+  <header class="result-card__header">
+    <span class="result-card__eyebrow">Current weather</span>
+    <h2 id="result-location" class="result-card__location">{{ result.displayName }}</h2>
+  </header>
+
+  <div class="result-card__hero">
+    <div class="result-card__temperature" aria-label="Temperature">
+      <span class="result-card__temp-c">{{ result.temperatureC | number:'1.0-1' }} °C</span>
+      <span class="result-card__temp-divider" aria-hidden="true">/</span>
+      <span class="result-card__temp-f">{{ result.temperatureF | number:'1.0-1' }} °F</span>
+    </div>
+    <p class="result-card__conditions">{{ result.conditions }}</p>
+  </div>
+
+  <dl class="result-card__metrics">
+    <div class="result-card__metric">
+      <dt>Humidity</dt>
+      <dd>{{ result.humidity }}%</dd>
+    </div>
+    <div class="result-card__metric">
+      <dt>Wind</dt>
+      <dd>{{ result.windSpeed }} {{ result.windUnit }}</dd>
+    </div>
+  </dl>
+</article>

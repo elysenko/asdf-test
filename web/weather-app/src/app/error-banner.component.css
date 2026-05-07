@@ -1,0 +1,69 @@
+:host {
+  display: block;
+}
+
+.error-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--color-danger-border);
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.error-banner[data-severity='warning'] {
+  background: var(--color-warning-soft);
+  border-color: #fcd34d;
+  color: var(--color-warning);
+}
+
+.error-banner__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-top: 0.05rem;
+}
+
+.error-banner__message {
+  flex: 1;
+  margin: 0;
+  font-weight: 500;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.error-banner__dismiss {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-height: 32px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: inherit;
+  border-radius: var(--radius-sm);
+  padding: 0;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+.error-banner__dismiss:hover {
+  background: rgba(185, 28, 28, 0.08);
+}
+
+.error-banner__dismiss:active {
+  background: rgba(185, 28, 28, 0.16);
+}
+
+.error-banner[data-severity='warning'] .error-banner__dismiss:hover {
+  background: rgba(146, 64, 14, 0.08);
+}

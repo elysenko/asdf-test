@@ -1,0 +1,47 @@
+{
+  "app-login": {
+    "component_file": "src/app/login/login.component.ts",
+    "template_file": "src/app/login/login.component.html",
+    "source": "summary_parse"
+  },
+  "app-signup": {
+    "component_file": "src/app/signup/signup.component.ts",
+    "template_file": "src/app/signup/signup.component.html",
+    "source": "summary_parse"
+  },
+  "app-layout": {
+    "component_file": "src/app/shared/layout.component.ts",
+    "template_file": "src/app/shared/layout.component.html",
+    "source": "summary_parse"
+  },
+  "app-dashboard": {
+    "component_file": "src/app/dashboard/dashboard.component.ts",
+    "template_file": "src/app/dashboard/dashboard.component.html",
+    "source": "summary_parse"
+  },
+  "app-documents": {
+    "component_file": "src/app/documents/documents.component.ts",
+    "template_file": "src/app/documents/documents.component.html",
+    "source": "summary_parse"
+  },
+  "app-chat": {
+    "component_file": "src/app/chat/chat.component.ts",
+    "template_file": "src/app/chat/chat.component.html",
+    "source": "summary_parse"
+  },
+  "app-analysis": {
+    "component_file": "src/app/analysis/analysis.component.ts",
+    "template_file": "src/app/analysis/analysis.component.html",
+    "source": "summary_parse"
+  },
+  "app-admin": {
+    "component_file": "src/app/admin/admin.component.ts",
+    "template_file": "src/app/admin/admin.component.html",
+    "source": "summary_parse"
+  },
+  "app-root": {
+    "component_file": "/workspace/frontend/src/app/app.component.ts",
+    "template_file": "/workspace/frontend/src/app/app.component.ts",
+    "source": "filesystem_scan"
+  }
+}

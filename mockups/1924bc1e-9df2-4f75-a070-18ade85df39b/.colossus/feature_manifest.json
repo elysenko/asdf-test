@@ -1,0 +1,118 @@
+{
+  "app-root": {
+    "component_file": "/workspace/frontend/src/app/app.component.ts",
+    "views": [],
+    "rendered_sections": [],
+    "section_headers": [],
+    "methods": []
+  },
+  "app-chat": {
+    "component_file": "/workspace/frontend/src/app/chat/chat.component.ts",
+    "views": [],
+    "rendered_sections": [
+      "div",
+      "span",
+      "path"
+    ],
+    "section_headers": [],
+    "methods": [
+      "formatTime",
+      "formatContent",
+      "setMode",
+      "selectStep",
+      "onEnter",
+      "sendMessage",
+      "simulate503",
+      "if"
+    ]
+  },
+  "app-signup": {
+    "component_file": "/workspace/frontend/src/app/signup/signup.component.ts",
+    "views": [],
+    "rendered_sections": [],
+    "section_headers": [],
+    "methods": [
+      "setLang",
+      "onSignup",
+      "if"
+    ]
+  },
+  "app-dashboard": {
+    "component_file": "/workspace/frontend/src/app/dashboard/dashboard.component.ts",
+    "views": [],
+    "rendered_sections": [
+      "span",
+      "polyline",
+      "div"
+    ],
+    "section_headers": [],
+    "methods": [
+      "if",
+      "formatRelativeTime",
+      "navigateTo"
+    ]
+  },
+  "app-analysis": {
+    "component_file": "/workspace/frontend/src/app/analysis/analysis.component.ts",
+    "views": [],
+    "rendered_sections": [
+      "span",
+      "span",
+      "h4"
+    ],
+    "section_headers": [],
+    "methods": [
+      "toggleExpand",
+      "runAnalysis"
+    ]
+  },
+  "app-login": {
+    "component_file": "/workspace/frontend/src/app/login/login.component.ts",
+    "views": [],
+    "rendered_sections": [],
+    "section_headers": [],
+    "methods": [
+      "setLang",
+      "if",
+      "onLogin",
+      "onDemoFirmLogin",
+      "onDemoFirmLoginBG",
+      "onDemoAdminLogin",
+      "onDemoAdminChatLogs",
+      "onDemoAdminAuditLog"
+    ]
+  },
+  "app-documents": {
+    "component_file": "/workspace/frontend/src/app/documents/documents.component.ts",
+    "views": [],
+    "rendered_sections": [
+      "label",
+      "span",
+      "span",
+      "div",
+      "p",
+      "h4",
+      "h4"
+    ],
+    "section_headers": [],
+    "methods": [
+      "onDragEnter",
+      "onDragOver",
+      "onDragLeave",
+      "onDrop",
+      "onBrowse",
+      "onSearch",
+      "setStatusFilter",
+      "for",
+      "if",
+      "openUploadWizard",
+      "closeUploadWizard",
+      "getDocTypeDescription",
+      "startAIGuidance",
+      "onWizardUpload",
+      "viewDocument",
+      "closeDocViewer",
+      "downloadDocument"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: asdf-test-staging
+  namespace: colossus-514d2755-6803-4c29-9-staging
+  labels:
+    app: asdf-test-staging
+    managed-by: colossus
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: ubuntu.desmana-truck.ts.net
+      http:
+        paths:
+          - path: /asdf-test-staging
+            pathType: Prefix
+            backend:
+              service:
+                name: asdf-test-staging
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - ubuntu.desmana-truck.ts.net
+      secretName: colossus-shared-tls

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: asdf-test-staging
+  namespace: colossus-514d2755-6803-4c29-9-staging
+  labels:
+    app: asdf-test-staging
+    managed-by: colossus
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: asdf-test-staging
+  template:
+    metadata:
+      labels:
+        app: asdf-test-staging
+    spec:
+      hostAliases:
+        - ip: "192.168.50.250"
+          hostnames:
+            - "ubuntu.desmana-truck.ts.net"
+      containers:
+        - name: app
+          image: ubuntu:30500/asdf-test-staging:latest
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: app-secrets
+                optional: true

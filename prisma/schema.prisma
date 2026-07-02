@@ -8,6 +8,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-1.1.x", "linux-arm64-openssl-3.0.x"]
 }
 
 // NOTE: backend_agent removed the `prisma-pothos-types` generator that was
